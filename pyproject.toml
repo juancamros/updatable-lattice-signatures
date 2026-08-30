@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "updatable-lattice-signatures-tfm"
+version = "0.1.0"
+description = "Academic proof of concept of an updatable lattice-based digital signature scheme"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "AGPL-3.0-or-later"
+license-files = ["LICENSE"]
+authors = [
+  { name = "Juan Jose Campos Rosa" }
+]
+dependencies = [
+  "numpy",
+  "matplotlib",
+  "psutil",
+  "PyNaCl",
+]
+
+[tool.setuptools]
+py-modules = ["crecimiento_dispersion", "ejecutar"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*", "scripts*"]
+
+[project.scripts]
+tfm-signatures = "ejecutar:main"
+tfm-usgpv-demo = "scripts.demostracion_usgpv:main"
+tfm-usgpv-benchmark = "scripts.rendimiento_usgpv:main"
+tfm-crsst21-benchmark = "scripts.rendimiento_crsst21:main"
+tfm-covariance = "scripts.analisis_covarianza:main"
+tfm-pca = "scripts.analisis_pca:main"
+tfm-gaussian-demo = "scripts.demostracion_correccion_gaussiana:main"
+tfm-parameter-plots = "scripts.graficas_dispersion:main"

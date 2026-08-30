@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata below."
+title: "Implementacion de protocolo actualizable de firma digital basado en reticulos"
+type: software
+authors:
+  - family-names: "Campos Rosa"
+    given-names: "Juan Jose"
+version: 0.1.0
+date-released: 2026-06-02
+license: AGPL-3.0-or-later
+keywords:
+  - updatable signatures
+  - lattice cryptography
+  - post-quantum cryptography
+  - GPV
+  - CRSST21
+  - proof of concept
