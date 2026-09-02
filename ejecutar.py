@@ -17,6 +17,7 @@ COMMANDS = {
     "pca": "scripts.analisis_pca",
     "correccion-gaussiana": "scripts.demostracion_correccion_gaussiana",
     "graficas-dispersion": "scripts.graficas_dispersion",
+    "prueba-lll": "scripts.prueba_reduccion_LLL"
 }
 
 
