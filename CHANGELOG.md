@@ -8,9 +8,7 @@ The update-token generation procedure has been modified with the objective of
 reducing the spectral norm of the token while preserving the required algebraic
 relation
 
-$$
-A_{e+1}\Delta_{e+1} = A_e \pmod q
-$$
+$$ A_{e+1}\Delta_{e+1} = A_e \pmod q $$
 
 Since the update token is generated only once per epoch and is kept private, its
 statistical distribution does not need to match the spherical distribution required
@@ -36,29 +34,15 @@ The following modifications have been introduced:
 
 - Update tokens use a dedicated covariance matrix defined from
 
-  $$
-  M_{\mathrm{boundary}}
-  =
-  B(2I_w+\Sigma_G)B^T
-  $$
+  $$ M_{\mathrm{boundary}} = B(2I_w+\Sigma_G)B^T $$
 
   and
 
-  $$
-  \Sigma_{\mathrm{token}}
-  =
-  (1+\delta)M_{\mathrm{boundary}}
-  +
-  \eta I_m
-  $$
+  $$ \Sigma_{\mathrm{token}} = (1+\delta)M_{\mathrm{boundary}} + \eta I_m $$
 
   with
 
-  $$
-  \delta = 0.02,
-  \qquad
-  \eta = \sigma_G
-  $$
+  $$ \delta = 0.02, \qquad \eta = \sigma_G $$
 
   The factor $\delta=0.02$ introduces a small safety margin above the covariance
   boundary, while the additive term $\sigma_G I_m$ provides a minimum isotropic
@@ -66,13 +50,7 @@ The following modifications have been introduced:
 
 - The covariance used for the perturbation during token generation is therefore
 
-  $$
-  \Sigma_p
-  =
-  \Sigma_{\mathrm{token}}
-  -
-  B\Sigma_GB^T
-  $$
+  $$ \Sigma_p = \Sigma_{\mathrm{token}} - B\Sigma_GB^T $$
 
 #### Experimental evaluation of the update-token norm
 
@@ -89,15 +67,11 @@ The spectral norm of the generated tokens showed the following distribution:
 
 Based on these results, the fixed update-growth parameter was reduced from
 
-$$
-c_{\mathrm{upd}} = 22900
-$$
+$$ c_{\mathrm{upd}} = 22900 $$
 
 to
 
-$$
-c_{\mathrm{upd}} = 3200
-$$
+$$ c_{\mathrm{upd}} = 3200 $$
 
 This corresponds to an approximately $86.0\%$ reduction in
 $c_{\mathrm{upd}}$.
@@ -115,11 +89,7 @@ proven theoretical upper bound.
 Reducing $c_{\mathrm{upd}}$ directly slows the growth of the epoch-dependent
 Gaussian parameters, since
 
-$$
-s_{e+1}
-=
-c_{\mathrm{upd}}(s_e+1)
-$$
+$$ s_{e+1} = c_{\mathrm{upd}}(s_e+1) $$
 
 The reduction of the update-token norm therefore affects not only the token itself,
 but also the evolution of the complete scheme through successive epochs.
@@ -127,42 +97,28 @@ but also the evolution of the complete scheme through successive epochs.
 A scalability experiment was performed using the same dimension, initial
 parameters and random seed, changing the fixed update-growth parameter from
 
-$$
-c_{\mathrm{upd}}=22900
-$$
+$$ c_{\mathrm{upd}}=22900 $$
 
 to
 
-$$
-c_{\mathrm{upd}}=3200
-$$
+$$ c_{\mathrm{upd}}=3200 $$
 
 With the previous value $c_{\mathrm{upd}}=22900$, the Gaussian parameters evolve
 as
 
-$$
-s_1 \approx 5.36\times10^5
-$$
+$$ s_1 \approx 5.36\times10^5 $$
 
-$$
-s_2 \approx 1.23\times10^{10}
-$$
+$$ s_2 \approx 1.23\times10^{10} $$
 
-$$
-s_3 \approx 2.81\times10^{14}
-$$
+$$ s_3 \approx 2.81\times10^{14} $$
 
 and
 
-$$
-s_4 \approx 6.44\times10^{18}
-$$
+$$ s_4 \approx 6.44\times10^{18} $$
 
 At epoch 4, the corresponding Gaussian scale reaches
 
-$$
-r s_4 \approx 3.85\times10^{19}
-$$
+$$ r s_4 \approx 3.85\times10^{19} $$
 
 which is approximately $4.18$ times larger than the maximum value representable
 by `np.int64`. Therefore, under the current numerical implementation, epochs up to
@@ -171,76 +127,52 @@ the available integer range.
 
 With the new value $c_{\mathrm{upd}}=3200$, the parameter growth becomes
 
-$$
-s_1 \approx 7.49\times10^4
-$$
+$$ s_1 \approx 7.49\times10^4 $$
 
-$$
-s_2 \approx 2.40\times10^8
-$$
+$$ s_2 \approx 2.40\times10^8 $$
 
-$$
-s_3 \approx 7.67\times10^{11}
-$$
+$$ s_3 \approx 7.67\times10^{11} $$
 
 and
 
-$$
-s_4 \approx 2.45\times10^{15}
-$$
+$$ s_4 \approx 2.45\times10^{15} $$
 
 At epoch 4
 
-$$
-r s_4 \approx 1.47\times10^{16}
-$$
+$$ r s_4 \approx 1.47\times10^{16} $$
 
 which remains well inside the `int64` range. The numerical limit is instead reached
 at epoch 5, where
 
-$$
-r s_5 \approx 4.70\times10^{19}
-$$
+$$ r s_5 \approx 4.70\times10^{19} $$
 
 Under the current `int64` implementation, the experimentally reliable update depth
 therefore increases from three to four successive updates.
 
 At epoch 4, the Gaussian parameter is reduced from approximately
 
-$$
-6.44\times10^{18}
-$$
+$$ 6.44\times10^{18} $$
 
 to
 
-$$
-2.45\times10^{15}
-$$
+$$ 2.45\times10^{15} $$
 
 corresponding to a reduction by a factor of approximately
 
-$$
-2623
-$$
+$$ 2623 $$
 
 The corresponding signature bound is also substantially reduced, from approximately
 
-$$
-\beta_4 \approx 1.18\times10^{21}
-$$
+$$ \beta_4 \approx 1.18\times10^{21} $$
 
 to
 
-$$
-\beta_4 \approx 4.49\times10^{17}
-$$
+$$ \beta_4 \approx 4.49\times10^{17} $$
 
 The update-token spectral norms remain essentially unchanged between both
 experiments. For example, the first four transition tokens have norms approximately
 
-$$
-2943,\quad 2903,\quad 2848,\quad 2893
-$$
+$$ 2943,\quad 2903,\quad 2848,\quad 2893 $$
 
 in both configurations. This experimentally confirms that the dedicated token
 sampler is decoupled from the epoch-dependent signature dispersion.
@@ -278,19 +210,11 @@ update procedure.
 
 CRSST21 performs a deterministic update:
 
-$$
-u_{e+1}
-=
-\Delta_{e+1}u_e
-$$
+$$ u_{e+1} = \Delta_{e+1}u_e $$
 
 USGPV instead introduces an additional Gaussian correction term:
 
-$$
-u_{e+1}
-=
-\Delta_{e+1}u_e+r_e
-$$
+$$ u_{e+1} = \Delta_{e+1}u_e+r_e $$
 
 The correction noise in USGPV is sampled so that an updated signature targets the
 same epoch-dependent Gaussian dispersion as a freshly generated signature at the
@@ -311,15 +235,11 @@ The tested properties include:
 
 - trapdoor correctness:
 
-  $$
-  AB = G \pmod q;
-  $$
+  $$ AB = G \pmod q; $$
 
 - gadget-kernel correctness:
 
-  $$
-  GS = 0 \pmod q;
-  $$
+  $$ GS = 0 \pmod q; $$
 
 - correctness of the binary decomposition and gadget preimage sampler;
 
@@ -337,12 +257,7 @@ The tested properties include:
 
 - update-token correctness:
 
-  $$
-  A_{e+1}\Delta_{e+1}
-  =
-  A_e
-  \pmod q;
-  $$
+  $$ A_{e+1}\Delta_{e+1} = A_e \pmod q; $$
 
 - complete
 
