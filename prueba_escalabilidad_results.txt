@@ -1,0 +1,489 @@
+================================================================================
+PRUEBA DE ESCALABILIDAD USGPV
+================================================================================
+Test de dispersión adecuada para la matriz G: True
+Test de dispersión adecuada para  s_0: True
+Modo firma configurado
+True
+El vector tiene norma 2916.521043983739 que es menor que la cota 4257.53
+La afirmación pública t_e es cierta para la relación definida
+La congruencia es verdadera
+
+  e              s_e            r*s_e           beta_e       ||sign||_2        max|sign|
+------------------------------------------------------------------------------------------
+  0     2.240000e+01     1.340996e+02     4.257530e+03     2.916521e+03     3.930000e+02
+
+================================================================================
+ACTUALIZACIÓN A ÉPOCA 1
+================================================================================
+s_1       = 5.358600e+05
+r * s_1   = 3.207975e+06
+int64 max   = 9.223372e+18
+(r*s_e)/int64_max = 3.478093e-13
+Test de dispersión adecuada para la matriz G: True
+Test de dispersión adecuada para  s_1: True
+Modo token configurado
+El vector tiene norma 66223675.43895095 que es menor que la cota 97982138.64
+La afirmación pública t_e es cierta para la relación definida
+La congruencia es verdadera
+
+||Delta_1||_2 = 2.943195e+03
+||sign_1||_2  = 6.622368e+07
+max|sign_1|   = 9.063243e+06
+beta_1        = 9.798214e+07
+Next time        = 0.564 s
+Update time      = 0.097 s
+Verify           = True
+
+  1     5.358600e+05     3.207975e+06     9.798214e+07     6.622368e+07     9.063243e+06
+
+================================================================================
+ACTUALIZACIÓN A ÉPOCA 2
+================================================================================
+s_2       = 1.227122e+10
+r * s_2   = 7.346276e+10
+int64 max   = 9.223372e+18
+(r*s_e)/int64_max = 7.964848e-09
+Test de dispersión adecuada para la matriz G: True
+Test de dispersión adecuada para  s_2: True
+Modo token configurado
+El vector tiene norma 1508560342440.6182 que es menor que la cota 2243791459557.64
+La afirmación pública t_e es cierta para la relación definida
+La congruencia es verdadera
+
+||Delta_2||_2 = 2.903172e+03
+||sign_2||_2  = 1.508560e+12
+max|sign_2|   = 2.505654e+11
+beta_2        = 2.243791e+12
+Next time        = 0.632 s
+Update time      = 0.096 s
+Verify           = True
+
+  2     1.227122e+10     7.346276e+10     2.243791e+12     1.508560e+12     2.505654e+11
+
+================================================================================
+ACTUALIZACIÓN A ÉPOCA 3
+================================================================================
+s_3       = 2.810109e+14
+r * s_3   = 1.682297e+15
+int64 max   = 9.223372e+18
+(r*s_e)/int64_max = 1.823950e-04
+Test de dispersión adecuada para la matriz G: True
+Test de dispersión adecuada para  s_3: True
+Modo token configurado
+El vector tiene norma 3.5354401610470564e+16 que es menor que la cota 5.1382824424354664e+16
+La afirmación pública t_e es cierta para la relación definida
+La congruencia es verdadera
+
+||Delta_3||_2 = 2.847727e+03
+||sign_3||_2  = 3.535440e+16
+max|sign_3|   = 6.240677e+15
+beta_3        = 5.138282e+16
+Next time        = 0.668 s
+Update time      = 0.100 s
+Verify           = True
+
+  3     2.810109e+14     1.682297e+15     5.138282e+16     3.535440e+16     6.240677e+15
+
+================================================================================
+ACTUALIZACIÓN A ÉPOCA 4
+================================================================================
+s_4       = 6.435149e+18
+r * s_4   = 3.852460e+19
+int64 max   = 9.223372e+18
+(r*s_e)/int64_max = 4.176846e+00
+
+ADVERTENCIA: la escala gaussiana ya alcanza o supera el rango de int64.
+Test de dispersión adecuada para la matriz G: True
+Test de dispersión adecuada para  s_4: True
+Modo token configurado
+El vector tiene norma 1.656617640117657e+20 que es menor que la cota 1.1766666793177223e+21
+La afirmación pública t_e es cierta para la relación definida
+La congruencia es verdadera
+
+||Delta_4||_2 = 2.892945e+03
+||sign_4||_2  = 1.656618e+20
+max|sign_4|   = 9.223244e+18
+beta_4        = 1.176667e+21
+Next time        = 0.636 s
+Update time      = 0.095 s
+Verify           = True
+
+  4     6.435149e+18     3.852460e+19     1.176667e+21     1.656618e+20     9.223244e+18
+
+================================================================================
+ACTUALIZACIÓN A ÉPOCA 5
+================================================================================
+s_5       = 1.473649e+23
+r * s_5   = 8.822134e+23
+int64 max   = 9.223372e+18
+(r*s_e)/int64_max = 9.564977e+04
+
+ADVERTENCIA: la escala gaussiana ya alcanza o supera el rango de int64.
+Test de dispersión adecuada para la matriz G: True
+Test de dispersión adecuada para  s_5: True
+Modo token configurado
+El vector tiene norma 1.1292537330034804e+20 que es menor que la cota 2.694566695637584e+25
+La afirmación pública t_e es cierta para la relación definida
+La congruencia es verdadera
+
+||Delta_5||_2 = 2.926074e+03
+||sign_5||_2  = 1.129254e+20
+max|sign_5|   = 9.218799e+18
+beta_5        = 2.694567e+25
+Next time        = 0.671 s
+Update time      = 0.094 s
+Verify           = True
+
+  5     1.473649e+23     8.822134e+23     2.694567e+25     1.129254e+20     9.218799e+18
+
+================================================================================
+ACTUALIZACIÓN A ÉPOCA 6
+================================================================================
+s_6       = 3.374656e+27
+r * s_6   = 2.020269e+28
+int64 max   = 9.223372e+18
+(r*s_e)/int64_max = 2.190380e+09
+
+ADVERTENCIA: la escala gaussiana ya alcanza o supera el rango de int64.
+Test de dispersión adecuada para la matriz G: True
+Test de dispersión adecuada para  s_6: True
+Modo token configurado
+El vector tiene norma 1.1440706510856148e+20 que es menor que la cota 6.170557733010067e+29
+La afirmación pública t_e es cierta para la relación definida
+La congruencia es verdadera
+
+||Delta_6||_2 = 2.848704e+03
+||sign_6||_2  = 1.144071e+20
+max|sign_6|   = 9.202607e+18
+beta_6        = 6.170558e+29
+Next time        = 0.670 s
+Update time      = 0.089 s
+Verify           = True
+
+  6     3.374656e+27     2.020269e+28     6.170558e+29     1.144071e+20     9.202607e+18
+
+================================================================================
+ACTUALIZACIÓN A ÉPOCA 7
+================================================================================
+s_7       = 7.727963e+31
+r * s_7   = 4.626416e+32
+int64 max   = 9.223372e+18
+(r*s_e)/int64_max = 5.015970e+13
+
+ADVERTENCIA: la escala gaussiana ya alcanza o supera el rango de int64.
+Test de dispersión adecuada para la matriz G: True
+Test de dispersión adecuada para  s_7: True
+Modo token configurado
+El vector tiene norma 1.1020597141763973e+20 que es menor que la cota 1.4130577208593055e+34
+La afirmación pública t_e es cierta para la relación definida
+La congruencia es verdadera
+
+||Delta_7||_2 = 2.792420e+03
+||sign_7||_2  = 1.102060e+20
+max|sign_7|   = 9.184177e+18
+beta_7        = 1.413058e+34
+Next time        = 0.662 s
+Update time      = 0.096 s
+Verify           = True
+
+  7     7.727963e+31     4.626416e+32     1.413058e+34     1.102060e+20     9.184177e+18
+
+================================================================================
+ACTUALIZACIÓN A ÉPOCA 8
+================================================================================
+s_8       = 1.769704e+36
+r * s_8   = 1.059449e+37
+int64 max   = 9.223372e+18
+(r*s_e)/int64_max = 1.148657e+18
+
+ADVERTENCIA: la escala gaussiana ya alcanza o supera el rango de int64.
+Test de dispersión adecuada para la matriz G: True
+Test de dispersión adecuada para  s_8: True
+Modo token configurado
+El vector tiene norma 1.1716644196908694e+20 que es menor que la cota 3.2359021807678094e+38
+La afirmación pública t_e es cierta para la relación definida
+La congruencia es verdadera
+
+||Delta_8||_2 = 2.910952e+03
+||sign_8||_2  = 1.171664e+20
+max|sign_8|   = 9.207745e+18
+beta_8        = 3.235902e+38
+Next time        = 0.715 s
+Update time      = 0.094 s
+Verify           = True
+
+  8     1.769704e+36     1.059449e+37     3.235902e+38     1.171664e+20     9.207745e+18
+
+================================================================================
+ACTUALIZACIÓN A ÉPOCA 9
+================================================================================
+s_9       = 4.052621e+40
+r * s_9   = 2.426139e+41
+int64 max   = 9.223372e+18
+(r*s_e)/int64_max = 2.630425e+22
+
+ADVERTENCIA: la escala gaussiana ya alcanza o supera el rango de int64.
+Test de dispersión adecuada para la matriz G: True
+Test de dispersión adecuada para  s_9: True
+Modo token configurado
+El vector tiene norma 1.1408435991677713e+20 que es menor que la cota 7.410215993958284e+42
+La afirmación pública t_e es cierta para la relación definida
+La congruencia es verdadera
+
+||Delta_9||_2 = 2.909611e+03
+||sign_9||_2  = 1.140844e+20
+max|sign_9|   = 9.202690e+18
+beta_9        = 7.410216e+42
+Next time        = 0.529 s
+Update time      = 0.091 s
+Verify           = True
+
+  9     4.052621e+40     2.426139e+41     7.410216e+42     1.140844e+20     9.202690e+18
+================================================================================
+PRUEBA DE ESCALABILIDAD USGPV
+================================================================================
+Test de dispersión adecuada para la matriz G: True
+Test de dispersión adecuada para  s_0: True
+================================================================================
+PRUEBA DE ESCALABILIDAD USGPV
+================================================================================
+Test de dispersión adecuada para la matriz G: True
+Test de dispersión adecuada para  s_0: True
+Modo firma configurado
+True
+El vector tiene norma 2916.521043983739 que es menor que la cota 4257.53
+La afirmación pública t_e es cierta para la relación definida
+La congruencia es verdadera
+
+  e              s_e            r*s_e           beta_e       ||sign||_2        max|sign|
+------------------------------------------------------------------------------------------
+  0     2.240000e+01     1.340996e+02     4.257530e+03     2.916521e+03     3.930000e+02
+
+================================================================================
+ACTUALIZACIÓN A ÉPOCA 1
+================================================================================
+s_1       = 5.358600e+05
+r * s_1   = 3.207975e+06
+int64 max   = 9.223372e+18
+(r*s_e)/int64_max = 3.478093e-13
+Test de dispersión adecuada para la matriz G: True
+Test de dispersión adecuada para  s_1: True
+Modo token configurado
+El vector tiene norma 66223675.43895095 que es menor que la cota 97982138.64
+La afirmación pública t_e es cierta para la relación definida
+La congruencia es verdadera
+
+||Delta_1||_2 = 2.943195e+03
+||sign_1||_2  = 6.622368e+07
+max|sign_1|   = 9.063243e+06
+beta_1        = 9.798214e+07
+Next time        = 0.700 s
+Update time      = 0.101 s
+Verify           = True
+
+  1     5.358600e+05     3.207975e+06     9.798214e+07     6.622368e+07     9.063243e+06
+
+================================================================================
+ACTUALIZACIÓN A ÉPOCA 2
+================================================================================
+s_2       = 1.227122e+10
+r * s_2   = 7.346276e+10
+int64 max   = 9.223372e+18
+(r*s_e)/int64_max = 7.964848e-09
+Test de dispersión adecuada para la matriz G: True
+Test de dispersión adecuada para  s_2: True
+Modo token configurado
+El vector tiene norma 1508560342440.6182 que es menor que la cota 2243791459557.64
+La afirmación pública t_e es cierta para la relación definida
+La congruencia es verdadera
+
+||Delta_2||_2 = 2.903172e+03
+||sign_2||_2  = 1.508560e+12
+max|sign_2|   = 2.505654e+11
+beta_2        = 2.243791e+12
+Next time        = 0.702 s
+Update time      = 0.099 s
+Verify           = True
+
+  2     1.227122e+10     7.346276e+10     2.243791e+12     1.508560e+12     2.505654e+11
+
+================================================================================
+ACTUALIZACIÓN A ÉPOCA 3
+================================================================================
+s_3       = 2.810109e+14
+r * s_3   = 1.682297e+15
+int64 max   = 9.223372e+18
+(r*s_e)/int64_max = 1.823950e-04
+Test de dispersión adecuada para la matriz G: True
+Test de dispersión adecuada para  s_3: True
+Modo token configurado
+El vector tiene norma 3.5354401610470564e+16 que es menor que la cota 5.1382824424354664e+16
+La afirmación pública t_e es cierta para la relación definida
+La congruencia es verdadera
+
+||Delta_3||_2 = 2.847727e+03
+||sign_3||_2  = 3.535440e+16
+max|sign_3|   = 6.240677e+15
+beta_3        = 5.138282e+16
+Next time        = 0.661 s
+Update time      = 0.094 s
+Verify           = True
+
+  3     2.810109e+14     1.682297e+15     5.138282e+16     3.535440e+16     6.240677e+15
+
+================================================================================
+ACTUALIZACIÓN A ÉPOCA 4
+================================================================================
+s_4       = 6.435149e+18
+r * s_4   = 3.852460e+19
+int64 max   = 9.223372e+18
+(r*s_e)/int64_max = 4.176846e+00
+
+ADVERTENCIA: la escala gaussiana ya alcanza o supera el rango de int64.
+Test de dispersión adecuada para la matriz G: True
+Test de dispersión adecuada para  s_4: True
+Modo token configurado
+El vector tiene norma 1.656617640117657e+20 que es menor que la cota 1.1766666793177223e+21
+La afirmación pública t_e es cierta para la relación definida
+La congruencia es verdadera
+
+||Delta_4||_2 = 2.892945e+03
+||sign_4||_2  = 1.656618e+20
+max|sign_4|   = 9.223244e+18
+beta_4        = 1.176667e+21
+Next time        = 0.663 s
+Update time      = 0.100 s
+Verify           = True
+
+  4     6.435149e+18     3.852460e+19     1.176667e+21     1.656618e+20     9.223244e+18
+
+================================================================================
+ACTUALIZACIÓN A ÉPOCA 5
+================================================================================
+s_5       = 1.473649e+23
+r * s_5   = 8.822134e+23
+int64 max   = 9.223372e+18
+(r*s_e)/int64_max = 9.564977e+04
+
+ADVERTENCIA: la escala gaussiana ya alcanza o supera el rango de int64.
+Test de dispersión adecuada para la matriz G: True
+Test de dispersión adecuada para  s_5: True
+Modo token configurado
+El vector tiene norma 1.1292537330034804e+20 que es menor que la cota 2.694566695637584e+25
+La afirmación pública t_e es cierta para la relación definida
+La congruencia es verdadera
+
+||Delta_5||_2 = 2.926074e+03
+||sign_5||_2  = 1.129254e+20
+max|sign_5|   = 9.218799e+18
+beta_5        = 2.694567e+25
+Next time        = 0.651 s
+Update time      = 0.093 s
+Verify           = True
+
+  5     1.473649e+23     8.822134e+23     2.694567e+25     1.129254e+20     9.218799e+18
+
+================================================================================
+ACTUALIZACIÓN A ÉPOCA 6
+================================================================================
+s_6       = 3.374656e+27
+r * s_6   = 2.020269e+28
+int64 max   = 9.223372e+18
+(r*s_e)/int64_max = 2.190380e+09
+
+ADVERTENCIA: la escala gaussiana ya alcanza o supera el rango de int64.
+Test de dispersión adecuada para la matriz G: True
+Test de dispersión adecuada para  s_6: True
+Modo token configurado
+El vector tiene norma 1.1440706510856148e+20 que es menor que la cota 6.170557733010067e+29
+La afirmación pública t_e es cierta para la relación definida
+La congruencia es verdadera
+
+||Delta_6||_2 = 2.848704e+03
+||sign_6||_2  = 1.144071e+20
+max|sign_6|   = 9.202607e+18
+beta_6        = 6.170558e+29
+Next time        = 0.636 s
+Update time      = 0.091 s
+Verify           = True
+
+  6     3.374656e+27     2.020269e+28     6.170558e+29     1.144071e+20     9.202607e+18
+
+================================================================================
+ACTUALIZACIÓN A ÉPOCA 7
+================================================================================
+s_7       = 7.727963e+31
+r * s_7   = 4.626416e+32
+int64 max   = 9.223372e+18
+(r*s_e)/int64_max = 5.015970e+13
+
+ADVERTENCIA: la escala gaussiana ya alcanza o supera el rango de int64.
+Test de dispersión adecuada para la matriz G: True
+Test de dispersión adecuada para  s_7: True
+Modo token configurado
+El vector tiene norma 1.1020597141763973e+20 que es menor que la cota 1.4130577208593055e+34
+La afirmación pública t_e es cierta para la relación definida
+La congruencia es verdadera
+
+||Delta_7||_2 = 2.792420e+03
+||sign_7||_2  = 1.102060e+20
+max|sign_7|   = 9.184177e+18
+beta_7        = 1.413058e+34
+Next time        = 0.583 s
+Update time      = 0.090 s
+Verify           = True
+
+  7     7.727963e+31     4.626416e+32     1.413058e+34     1.102060e+20     9.184177e+18
+
+================================================================================
+ACTUALIZACIÓN A ÉPOCA 8
+================================================================================
+s_8       = 1.769704e+36
+r * s_8   = 1.059449e+37
+int64 max   = 9.223372e+18
+(r*s_e)/int64_max = 1.148657e+18
+
+ADVERTENCIA: la escala gaussiana ya alcanza o supera el rango de int64.
+Test de dispersión adecuada para la matriz G: True
+Test de dispersión adecuada para  s_8: True
+Modo token configurado
+El vector tiene norma 1.1716644196908694e+20 que es menor que la cota 3.2359021807678094e+38
+La afirmación pública t_e es cierta para la relación definida
+La congruencia es verdadera
+
+||Delta_8||_2 = 2.910952e+03
+||sign_8||_2  = 1.171664e+20
+max|sign_8|   = 9.207745e+18
+beta_8        = 3.235902e+38
+Next time        = 0.608 s
+Update time      = 0.095 s
+Verify           = True
+
+  8     1.769704e+36     1.059449e+37     3.235902e+38     1.171664e+20     9.207745e+18
+
+================================================================================
+ACTUALIZACIÓN A ÉPOCA 9
+================================================================================
+s_9       = 4.052621e+40
+r * s_9   = 2.426139e+41
+int64 max   = 9.223372e+18
+(r*s_e)/int64_max = 2.630425e+22
+
+ADVERTENCIA: la escala gaussiana ya alcanza o supera el rango de int64.
+Test de dispersión adecuada para la matriz G: True
+Test de dispersión adecuada para  s_9: True
+Modo token configurado
+El vector tiene norma 1.1408435991677713e+20 que es menor que la cota 7.410215993958284e+42
+La afirmación pública t_e es cierta para la relación definida
+La congruencia es verdadera
+
+||Delta_9||_2 = 2.909611e+03
+||sign_9||_2  = 1.140844e+20
+max|sign_9|   = 9.202690e+18
+beta_9        = 7.410216e+42
+Next time        = 0.613 s
+Update time      = 0.098 s
+Verify           = True
+
+  9     4.052621e+40     2.426139e+41     7.410216e+42     1.140844e+20     9.202690e+18

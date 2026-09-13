@@ -31,7 +31,7 @@ class usgpv:
         
         # Definimos la dimensión de salida, el número máximo de actualizaciones y el parámetro cupd
         self.n_param = n_param
-        self.N_param = N_param
+        self.N_param = N_param  
         self.cupd_param = cupd_param
 
         # Definimos las claves privadas, públicas y el token como variables para usar
