@@ -2,8 +2,6 @@ import numpy as np
 import hashlib
 import math
 import matplotlib.pyplot as plt
-from sympy import Matrix, Rational
-from sympy.polys.matrices.exceptions import DMRankError
 from datetime import datetime
 
 import random
@@ -17,7 +15,6 @@ from .crsst21 import crsst21
 
 from .ve_impostor import VE_keygen, VE_impostor_encrypt, VE_impostor_decrypt
 from nacl.public import PublicKey
-from scipy.optimize import linear_sum_assignment
 
 
 class usgpv:
@@ -41,7 +38,7 @@ class usgpv:
         self.R_matrix = None
         self.A_matrix = None
         self.token = None
-        self.sigma_G = 2.001
+        self.sigma_G = 2.0
         self.p0_param = 0.1
 
         # Definimos un registro para guardar las claves secretas, públicas, tokens y firmas por épocas
@@ -146,7 +143,7 @@ class usgpv:
                 denom = np.dot(B_star[:, j], B_star[:, j])
 
                 # Si el denominador es 0 devolvemos error
-                if denom == 0:
+                if denom < 1e-24:
                     raise ValueError('La base tiene vectores linealmente dependientes')
 
                 # Calculamos la proyección de v sobre todos los vectores que estén ya en B_star
@@ -155,29 +152,17 @@ class usgpv:
                 # Le restamos a v la parte no ortogonal en cada una de los vectores de B_star
                 v = v - projection
 
+            if np.dot(v, v) < 1e-24:
+                raise ValueError(
+                    'La base tiene vectores linealmente dependientes'
+                )
+            
+
             # Guardamos v en su columna correspondiente
             B_star[:, i] = v
 
         # Devolvemos la base ortogonalizada
         return B_star
-
-    @staticmethod
-    def integer_orthogonal_approximation(Q):
-        Q = np.asarray(Q, dtype=float)
-
-        # Buscamos una asignación fila-columna que maximice
-        # sum_i |Q[i, pi(i)]|
-        #
-        # linear_sum_assignment minimiza, por eso usamos -abs(Q)
-        rows, cols = linear_sum_assignment(-np.abs(Q))
-
-        # Construimos la matriz ortogonal entera
-        Q_int = np.zeros(Q.shape, dtype=np.int64)
-
-        for i, j in zip(rows, cols):
-            Q_int[i, j] = 1 if Q[i, j] >= 0 else -1
-
-        return Q_int
 
 
     def setup(self):
@@ -202,7 +187,7 @@ class usgpv:
         self.mbar_param = int(self.m_param - self.w_param)
 
         # Definimos el parámetro r para escalar dispersión y calcular cotas.
-        self.r_param = (1.5 * np.sqrt(5) * np.sqrt(np.log2(self.w_param))/ np.sqrt(self.sigma_G)) * 1.01
+        self.r_param = (1.5 * 2 * np.sqrt(np.log2(self.w_param))/ np.sqrt(self.sigma_G)) * 1.01
 
         # Calculamos los parámetros gaussianos para todas las épocas
         self.s_params = [np.round(self.p0_param*self.w_param,2)] 
@@ -246,6 +231,9 @@ class usgpv:
             
             if i < self.k_param-1:
                 self.S_k[i+1,i] = -1
+
+        # Hacemos esta permutación (invertir las columnas de orden) para reducir el Gram-Schmidt sin variar el retículo
+        self.S_k = self.S_k[:, ::-1]
 
         # Definimos la matriz S como el producto de kron de las matriz S_k y la identidad
         self.S_matrix = np.kron(self.I_n, self.S_k)
@@ -517,13 +505,8 @@ class usgpv:
         if mode == 'sign':
 
             SIGMA = (
-                self.s_params[0]**2
+                self.s_params[self.epoc_param]**2
                 * self.I_m.astype(float)
-            )
-
-            CENTRE = np.zeros(
-                (self.m_param, Y.shape[1]),
-                dtype=np.int64
             )
 
         elif mode == 'token':
@@ -542,105 +525,6 @@ class usgpv:
                 + eta * self.I_m
             )
 
-            # Calculamos la matriz de covarianza para muestrear la propuesta de firma inicial. En este caso, sabemos 
-            # que es semidefinida positiva por la segunda condición evaluada en TrapGen
-            self.SIGMA_p = SIGMA - MAT_G
-            self.SIGMA_p = (self.SIGMA_p + self.SIGMA_p.T) / 2           
-            # Sampleamos el vector p de una distribución normal multivariante centrada en 0 y con la covarianza SIGMA_p
-            p_real = self.rng.multivariate_normal(
-                mean=np.zeros(self.m_param),
-                cov=(self.r_param**2) * self.SIGMA_p,
-                size=Y.shape[1]
-            ).T
-            
-    
-            # Redondeamos p a un vector entero
-            P = np.rint(p_real).astype(np.int64)
-    
-            # Dividimos el vector p en p1 y p2 
-            P1 = P[:self.mbar_param, :]
-            P2 = P[self.mbar_param:, :]
-    
-            # Calculamos wbar y wprima 
-            Wbar = (
-                self.A_bar_matrix @ (P1 - self.R_matrix @ P2)
-            ) % self.q_param
-    
-            Wprima = (
-                self.G_matrix @ P2
-            ) % self.q_param
-    
-            # Calculamos V como la diferencia entre Y y la imagen del vector P. Así al calcular la preimagen de V, podremos 
-            # corregir P para que verifique la ecuación modular
-            V = (Y - Wbar - Wprima) % self.q_param
-    
-            # Sampleamos la preimagen correctora con el oráculo
-            Z = self.oracle_sampler(V)
-    
-            # Calculamos finalmente nuestra preimagen
-            CENTRE_AUX = P + self.B_matrix @ Z 
-    
-            # Comprobamos que la solución verifica efectivamente la ecuación modular
-            if not np.array_equal((self.A_matrix @ CENTRE_AUX) % self.q_param,Y):
-                raise ValueError('El token auxiliar generado no cumple la ecuación matricial')
-
-            # Ahora ejecutamos SVD sobre el token auxiliar
-
-            
-            U, _, Vt = np.linalg.svd(CENTRE_AUX)
-
-            Q = U @ Vt
-
-            CENTRE = self.integer_orthogonal_approximation(Q)
-
-            print(
-                "Q es ortogonal:",
-                np.allclose(
-                    Q.T @ Q,
-                    np.eye(Q.shape[0]),
-                    atol=1e-8
-                )
-            )
-
-            print(
-                "CENTRE es ortogonal:",
-                np.array_equal(
-                    CENTRE.T @ CENTRE,
-                    np.eye(CENTRE.shape[0], dtype=np.int64)
-                )
-            )
-
-            print(
-                "Norma espectral Q:",
-                np.linalg.norm(Q, ord=2)
-            )
-
-            print(
-                "Norma espectral CENTRE:",
-                np.linalg.norm(CENTRE, ord=2)
-            )
-
-            print(
-                "Distancia Frobenius Q -> CENTRE:",
-                np.linalg.norm(Q - CENTRE, ord="fro")
-            )
-
-            print(
-                "Distancia espectral Q -> CENTRE:",
-                np.linalg.norm(Q - CENTRE, ord=2)
-            )
-
-            print(
-                "Elementos no nulos:",
-                np.count_nonzero(CENTRE),
-                "/",
-                CENTRE.size
-            )
-
-        Y_shift = (
-            Y - self.A_matrix @ CENTRE
-        ) % self.q_param
-
         # Calculamos la matriz de covarianza para muestrear la propuesta de firma inicial. En este caso, sabemos 
         # que es semidefinida positiva por la segunda condición evaluada en TrapGen
         self.SIGMA_p = SIGMA - MAT_G
@@ -651,7 +535,8 @@ class usgpv:
         p_real = self.rng.multivariate_normal(
             mean=np.zeros(self.m_param),
             cov=(self.r_param**2) * self.SIGMA_p,
-            size=Y_shift.shape[1]
+            size=Y.shape[1],
+            method='eigh'
         ).T
 
 
@@ -673,13 +558,13 @@ class usgpv:
 
         # Calculamos V como la diferencia entre Y y la imagen del vector P. Así al calcular la preimagen de V, podremos 
         # corregir P para que verifique la ecuación modular
-        V = (Y_shift - Wbar - Wprima) % self.q_param
+        V = (Y - Wbar - Wprima) % self.q_param
 
         # Sampleamos la preimagen correctora con el oráculo
         Z = self.oracle_sampler(V)
 
         # Calculamos finalmente nuestra preimagen
-        X = P + self.B_matrix @ Z + CENTRE
+        X = P + self.B_matrix @ Z 
 
         # Comprobamos que la solución verifica efectivamente la ecuación modular
         if not np.array_equal((self.A_matrix @ X) % self.q_param,Y):
@@ -688,13 +573,6 @@ class usgpv:
         # Si la entrada es un vector, devolvemos la primera columna en forma de vector
         if single_input:
             return X[:, 0]
-
-                
-        print("||P||_2      =", np.linalg.norm(P, ord=2))
-        print("||BZ||_2     =", np.linalg.norm(self.B_matrix @ Z, ord=2))
-        print("||Z||_2      =", np.linalg.norm(Z, ord=2))
-        print("||CENTRE||_2 =", np.linalg.norm(CENTRE, ord=2))
-        print("||T||_2      =", np.linalg.norm(X, ord=2))
 
         return X
 
@@ -809,7 +687,7 @@ class usgpv:
 
         # Calculamos todas las firmas como preimágenes
         # U tendrá dimensión m_param x L
-        U = self.SamplePre((Y + statement_e) % self.q_param)
+        U = self.SamplePre((Y + statement_e) % self.q_param, mode='sign')
 
         print(np.array_equal((self.pk @ U) % self.q_param, (Y + statement_e) % self.q_param ))
 
@@ -929,7 +807,7 @@ class usgpv:
         self.VE_pk = self.VE_impostor_KeyGen()
 
         # Calculamos el token de actualización usando el algoritmo SamplePre
-        token = self.SamplePre(pk)
+        token = self.SamplePre(pk, mode='token')
         
         # Si el token verifica la ecuación modular, cambiamos de época
         if np.array_equal((self.pk @ token) % self.q_param,pk % self.q_param):
@@ -998,7 +876,8 @@ class usgpv:
         # Si lo es, entonces calculamos el ruido gaussiano
         r_noise_real = self.rng.multivariate_normal(
             mean=np.zeros(self.m_param,),
-            cov=(self.r_param**2) * self.SIGMA_upd
+            cov=(self.r_param**2) * self.SIGMA_upd,
+            method='eigh'
         )
 
         r_noise = np.rint(r_noise_real).astype(np.int64)

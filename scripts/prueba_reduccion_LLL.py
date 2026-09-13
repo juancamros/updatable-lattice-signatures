@@ -29,6 +29,8 @@ def main(argv=None):
     # Claves de época 0
     public_key_0, private_key_0 = system.KeyGen()
 
+    print(f'||R|| --> {np.linalg.norm(system.R_matrix,ord=2)}')
+
     # Generamos las claves de época 1.
     # Ignoramos el token generado por Next(),
     # ya que generaremos nuestros propios tokens.
