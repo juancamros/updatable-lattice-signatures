@@ -10,13 +10,13 @@ import importlib
 
 
 COMMANDS = {
-    "demo": "scripts.demostracion_usgpv",
-    "rendimiento-usgpv": "scripts.rendimiento_usgpv",
-    "rendimiento-crsst21": "scripts.rendimiento_crsst21",
-    "covarianza": "scripts.analisis_covarianza",
-    "pca": "scripts.analisis_pca",
-    "correccion-gaussiana": "scripts.demostracion_correccion_gaussiana",
-    "graficas-dispersion": "scripts.graficas_dispersion",
+    'demo': 'scripts.demostracion_usgpv',
+    'rendimiento-usgpv': 'scripts.rendimiento_usgpv',
+    'rendimiento-crsst21': 'scripts.rendimiento_crsst21',
+    'covarianza': 'scripts.analisis_covarianza',
+    'pca': 'scripts.analisis_pca',
+    'correccion-gaussiana': 'scripts.demostracion_correccion_gaussiana',
+    'graficas-dispersion': 'scripts.graficas_dispersion'
 }
 
 
